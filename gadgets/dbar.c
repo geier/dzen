@@ -1,4 +1,6 @@
 #include "dbar.h"
+#include "color.h"
+#include <stdlib.h>
 
 void
 dbardefaults(Dbar *dbar, int mode) {
@@ -28,16 +30,34 @@ fdbar(Dbar *dbar, FILE *stream) {
 	int i, rp, p, t;
 	int segs, segsa;
 	double l, perc;
+	float hColor, sColor, vColor;
+	float rColor, gColor, bColor;
 
 	perc = (100 * (dbar->val - dbar->minval)) / (dbar->maxval - dbar->minval);
 
-	if (dbar->val < 33)
-		dbar->fg="green";
-	else if (dbar->val < 66)
-		dbar->fg="yellow";
-	else
-		dbar->fg="red";
+	
+	hColor = abs(120-((float)perc * 120 / 100));
+	HSVtoRGB(&rColor, &gColor, &bColor,hColor,1.0,1.0);
+	char rText[4],gText[4],bText[4];
+	char rgbText[16];
 
+	if ((int)floorf(255*rColor) < 17)
+		sprintf(rText,"0%X",(int)floorf(255*rColor));
+	else
+		sprintf(rText,"%X",(int)floorf(255*rColor));
+
+	if ((int)floorf(255*gColor) < 17)
+		sprintf(gText,"0%X",(int)floorf(255*gColor));
+	else
+		sprintf(gText,"%X",(int)floorf(255*gColor));
+
+	if ((int)floorf(255*bColor) < 17)
+		sprintf(bText,"0%X",(int)floorf(255*bColor));
+	else
+		sprintf(bText,"%X",(int)floorf(255*bColor));
+	sprintf(rgbText,"#%s%s%s",rText,gText,bText);
+
+	dbar->fg=rgbText;
 	switch(dbar->style) {
 		case outlined:
 			l = perc * ((double)(dbar->width-2) / 100);

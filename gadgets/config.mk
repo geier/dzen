@@ -8,11 +8,11 @@ X11INC = /usr/X11R6/include
 INCS = -I. -I/usr/include -I${X11INC}
 
 X11LIB = /usr/X11R6/lib
-LIBS = -L/usr/lib 
+LIBS = -L/usr/lib
 
 CFLAGS = -Os ${INCS} 
-LDFLAGS = ${LIBS}
+LDFLAGS = ${LIBS} -lm
 
 # compiler and linker
-CC = gcc
+CC = clang
 LD = ${CC}

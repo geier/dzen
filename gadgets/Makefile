@@ -3,7 +3,7 @@
 
 include config.mk
 
-SRC = dbar.c dbar-main.c gdbar.c gcpubar.c textwidth.c
+SRC = dbar.c dbar-main.c gdbar.c gcpubar.c textwidth.c color.c
 OBJ = ${SRC:.c=.o}
 
 all: options dbar gdbar gcpubar textwidth
@@ -23,19 +23,19 @@ ${OBJ}: dbar.h config.mk
 
 dbar: ${OBJ}
 	@echo LD $@
-	@${LD} -o $@ dbar-main.o dbar.o ${LDFLAGS}
+	@${LD} -o $@ dbar-main.o color.o dbar.o ${LDFLAGS}
 	@strip $@
 
 gdbar: ${OBJ}
 	@echo LD $@
 #	@${LD} -o $@ gdbar.o dbar.o ${LDFLAGS} -L${X11LIB} -lX11
-	@${LD} -o $@ gdbar.o dbar.o ${LDFLAGS}
+	@${LD} -o $@ gdbar.o dbar.o color.o ${LDFLAGS}
 	@strip $@
 
 gcpubar: ${OBJ}
 	@echo LD $@
 #	@${LD} -o $@ gcpubar.o dbar.o ${LDFLAGS} -L${X11LIB}
-	@${LD} -o $@ gcpubar.o dbar.o ${LDFLAGS}
+	@${LD} -o $@ gcpubar.o dbar.o color.o ${LDFLAGS}
 	@strip $@
 
 textwidth: ${OBJ}
