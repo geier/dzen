@@ -31,6 +31,13 @@ fdbar(Dbar *dbar, FILE *stream) {
 
 	perc = (100 * (dbar->val - dbar->minval)) / (dbar->maxval - dbar->minval);
 
+	if (dbar->val < 33)
+		dbar->fg="green";
+	else if (dbar->val < 66)
+		dbar->fg="yellow";
+	else
+		dbar->fg="red";
+
 	switch(dbar->style) {
 		case outlined:
 			l = perc * ((double)(dbar->width-2) / 100);
