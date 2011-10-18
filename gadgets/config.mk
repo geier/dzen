@@ -11,7 +11,7 @@ X11LIB = /usr/X11R6/lib
 LIBS = -L/usr/lib
 
 CFLAGS = -Os ${INCS} 
-LDFLAGS = ${LIBS} -lm
+LDFLAGS = ${LIBS}
 
 # compiler and linker
 CC = clang

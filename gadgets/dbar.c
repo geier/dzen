@@ -41,20 +41,19 @@ fdbar(Dbar *dbar, FILE *stream) {
 	char rText[4],gText[4],bText[4];
 	char rgbText[16];
 
-	if ((int)floorf(255*rColor) < 17)
-		sprintf(rText,"0%X",(int)floorf(255*rColor));
+	if ((int)(255*rColor) < 17)
+		sprintf(rText,"0%X",(int)(255*rColor));
 	else
-		sprintf(rText,"%X",(int)floorf(255*rColor));
+		sprintf(rText,"%X",(int)(255*rColor));
 
-	if ((int)floorf(255*gColor) < 17)
-		sprintf(gText,"0%X",(int)floorf(255*gColor));
+	if ((int)(255*gColor) < 17)
+		sprintf(gText,"0%X",(int)(255*gColor));
 	else
-		sprintf(gText,"%X",(int)floorf(255*gColor));
-
-	if ((int)floorf(255*bColor) < 17)
-		sprintf(bText,"0%X",(int)floorf(255*bColor));
+		sprintf(gText,"%X",(int)(255*gColor));
+	if ((int)(255*bColor) < 17)
+		sprintf(bText,"0%X",(int)(255*bColor));
 	else
-		sprintf(bText,"%X",(int)floorf(255*bColor));
+		sprintf(bText,"%X",(int)(255*bColor));
 	sprintf(rgbText,"#%s%s%s",rText,gText,bText);
 
 	dbar->fg=rgbText;
